@@ -1,0 +1,24 @@
+version: "3"
+services:
+ haproxy-split:
+   build:
+     context: .
+     dockerfile: Dockerfile
+   ports:
+     - "6605:80"
+ rapido:
+   build:
+     context: .
+     dockerfile: DockerfileRapido
+   ports:
+    - "6604:80"
+   environment:
+    - NGINX_PORT=80
+ renderer:
+   build:
+     context: .
+     dockerfile: DockerfileRenderer
+   ports:
+    - "6603:80"
+   environment:
+    - NGINX_PORT=80
